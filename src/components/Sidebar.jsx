@@ -7,39 +7,22 @@ const Sidebar = () => {
         <li className="nav-title">Notiem</li>
         <li className="nav-item">
           <a className="nav-link" href="#">
-            <i className="nav-icon cil-speedometer"></i> Nav item
+            <i className="nav-icon cil-speedometer"></i> Usuarios
           </a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">
-            <i className="nav-icon cil-speedometer"></i> With badge 
-              &nbsp; <span className="badge bg-primary">NEW</span>
+            <i className="nav-icon cil-speedometer"></i> Roles 
+              &nbsp; <span className="badge bg-primary">Nuevo</span>
           </a>
-        </li>
-        <li className="nav-item nav-group">
-          <a className="nav-link nav-group-toggle" href="#">
-            <i className="nav-icon cil-puzzle"></i> Nav dropdown
-          </a>
-          <ul className="nav-group-items">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="nav-icon cil-puzzle"></i> Nav dropdown item
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="nav-icon cil-puzzle"></i> Nav dropdown item
-              </a>
-            </li>
-          </ul>
         </li>
         <li className="nav-item mt-auto">
           <a className="nav-link nav-link-success" href="https://coreui.io">
-            <i className="nav-icon cil-cloud-download"></i> Download CoreUI</a>
+            <i className="nav-icon cil-cloud-download"></i> Descargar</a>
         </li>
         <li className="nav-item">
           <a className="nav-link nav-link-danger" href="https://coreui.io/pro/">
-            <i className="nav-icon cil-layers"></i> Try CoreUI <strong>PRO</strong>
+            <i className="nav-icon cil-layers"></i> Cerrar <strong>x</strong>
           </a>
         </li>
       </ul>

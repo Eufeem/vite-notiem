@@ -112,53 +112,6 @@ const Content = () => {
           </div>
         </div>
 
-        <div className="row mt-3 justify-content-center">
-          <div className="col-md-11">
-            <div className="card border-start-3" style={{ width: '100%', borderLeftColor: '#042c93' }}>
-              <div className="card-header">
-                Formulario Usuarios
-              </div>
-
-              <div className="card-body">
-                <h5 className="card-title">Agregar Usuario</h5>
-
-                <form>
-                  <div className="row mt-3">
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="name" className="form-label">Nombre</label>
-                      <input type="text" className="form-control" id="name" placeholder="Ingresa tu nombre" />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="lastName" className="form-label">Apellido Paterno</label>
-                      <input type="text" className="form-control" id="lastName" placeholder="Ingresa tu apellido paterno" />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="email" className="form-label">Email</label>
-                      <input type="email" className="form-control" id="email" placeholder="Ingresa tu email" />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="job" className="form-label">Ocupación</label>
-                      <input type="text" className="form-control" id="job" placeholder="Ingresa tu ocupación" />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="age" className="form-label">Edad</label>
-                      <input type="email" className="form-control" id="age" placeholder="Ingresa tu edad" />
-                    </div>
-                  </div>
-
-                  <div className="row mt-3 justify-content-center">
-                    <div className="col-md-4 d-grid gap-2">
-                      <button className="btn btn-primary" type="button">Agregar</button>
-                    </div>
-                  </div>
-                </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
       </div>
   )
 }
