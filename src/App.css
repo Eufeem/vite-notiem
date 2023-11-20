@@ -1,0 +1,9 @@
+html, body {
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f4f7 !important;
+}
+
+.navbar-notiem {
+    background-color: #fff !important;
+}
