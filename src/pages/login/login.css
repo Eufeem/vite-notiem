@@ -1,0 +1,23 @@
+html,
+body {
+    background-color: #f0f4f7 !important;
+    height: 100vh;
+}
+
+p {
+    color: blue;
+}
+
+.bg-form {
+    /* background: red; */
+    background-color: white;
+}
+
+.bg-colorful {
+    background-image: url('../../assets/sidewall.jpeg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(60px);
+}

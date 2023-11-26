@@ -7,3 +7,9 @@ html, body {
 .navbar-notiem {
     background-color: #fff !important;
 }
+
+.footer-notiem {
+    bottom: 0;
+    position: relative;
+    width: auto;
+}

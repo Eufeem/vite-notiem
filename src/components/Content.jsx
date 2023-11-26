@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar'
 
 const Content = () => {
   return (
@@ -66,7 +65,7 @@ const Content = () => {
           </div>
         </div>
 
-        <div className="row mt-3 justify-content-center">
+        {/* <div className="row mt-3 justify-content-center">
           <div className="col-md-6">
             <div className="card border-start-3" style={{ width: '100%', borderLeftColor: '#042c93' }}>
               <div className="card-header">
@@ -154,7 +153,7 @@ const Content = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         
       </div>
