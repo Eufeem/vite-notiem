@@ -1,15 +1,14 @@
 import { lazy, useEffect, useState } from 'react'
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-// import Layout from './components/Layout'
-// import LayoutPublic from './components/LayoutPublic'
+import { ToastContainer, toast } from 'react-toastify'
+import { successNotification } from './utils/notification';
 
 // Pages Lazy Loading
-
 const Layout = lazy(() => import('./components/Layout'))
 const LayoutPublic = lazy(() => import('./components/LayoutPublic'))
-
 const LoginPage = lazy(() => import('./pages/login/LoginPage'))
 const UserPage = lazy(() => import('./pages/user/UserPage'))
 const NotFoundPage = lazy(() => import('./pages/notFound/NotFoundPage'))
@@ -17,11 +16,11 @@ const NotFoundPage = lazy(() => import('./pages/notFound/NotFoundPage'))
 export const App = () => {
 
   const [token, setToken] = useState('0')
-
   useEffect(() => {
     sessionStorage.setItem('token', '12345')
     setToken(sessionStorage.getItem('token'))
     // console.log('hi');
+
   }, null)
 
 
@@ -53,15 +52,25 @@ export const App = () => {
   //   )
   // }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<UserPage />} />
-          <Route path='/user' element={<UserPage />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<UserPage />} />
+            <Route path='/user' element={<UserPage />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      {/* Toast */}
+      <ToastContainer 
+        limit={4}         
+        newestOnTop={true}
+        position="top-right"
+        theme='light'/>
+    </>
+
   )
 }
 

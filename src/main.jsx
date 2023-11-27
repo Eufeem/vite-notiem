@@ -8,9 +8,14 @@ import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@coreui/icons/css/free.min.css'
 
+import { Provider } from 'react-redux'
+import { store } from './redux/store.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
+  <Provider store={store}>
     <App />
+  </Provider>
   // </React.StrictMode>,
 )
