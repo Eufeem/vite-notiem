@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: 0
+    value: 0,
+    showForm: false 
 }
 
 export const userSlice = createSlice({
@@ -9,10 +10,13 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         updateTableUser: (state, action) => {
-            state.value = action.payload
+            state.value = Math.random()
+        },
+        showFormUser: (state, action) => {
+            state.showForm = action.payload 
         }
     }
 })
 
-export const { updateTableUser } = userSlice.actions;
+export const { updateTableUser, showFormUser } = userSlice.actions;
 export default userSlice.reducer;

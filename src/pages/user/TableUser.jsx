@@ -1,15 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateTableUser } from '../../redux/userSlice'
+import { updateTableUser, showFormUser } from '../../redux/userSlice'
 
 const TableUser = () => {
 
   const [list, setList] = useState([])
-  const [count, setCount] = useState(0)
   const header = ['#', 'Nombre', 'Apellido', 'Username', 'Email', 'Estatus', 'Acciones']
   const urlapi = 'http://localhost:8080/user'
-  const userSelector = useSelector( (state) => state.user.value)
+  const userSelector = useSelector( (state) => state.user.value )
+  const userFormSelector = useSelector( (state) => state.user.showForm )
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const TableUser = () => {
   const getAll = () => {
     axios.get(urlapi).then((response) => {
       setList(response.data)
-    })
+    }) 
   }
 
   /* Delete user */
@@ -31,18 +31,22 @@ const TableUser = () => {
     })
   }
 
+  const eventShowForm = () => {
+    dispatch(showFormUser(true))
+  }
+
   return (
-    <div className="row mt-3 mb-3 justify-content-center">
+    <div className={"row mt-3 mb-3 justify-content-center " + (userFormSelector ? 'd-none' : '')}>
       <div className="col-md-12">
         <div className="card border-start-3" style={{ width: '100%', borderLeftColor: '#042c93' }}>
           <div className="card-header">
             Gestión Usuarios
           </div>
-
+          
           <div className="card-body">
             <div className="row mt-1">
               <div className="col-md-2 d-grid gap-2">
-                <button className="btn btn-sm btn-primary" type="button">
+                <button className="btn btn-sm btn-primary" type="button" onClick={() => eventShowForm()}>
                   <i className="cil-plus icon"></i> Agregar Nuevo
                 </button>
               </div>
@@ -96,6 +100,7 @@ const TableUser = () => {
                 </table>
               </div>
             </div>
+
           </div>
         </div>
       </div>

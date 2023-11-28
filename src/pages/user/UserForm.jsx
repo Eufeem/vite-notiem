@@ -2,14 +2,15 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { successNotification } from '../../utils/notification';
-import { useDispatch } from 'react-redux';
-import { updateTableUser } from '../../redux/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { showFormUser, updateTableUser } from '../../redux/userSlice';
 
 const UserForm = () => {
 
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
   const urlapi = 'http://localhost:8080/user'
+  const userFormSelector = useSelector( (state) => state.user.showForm )
   
   const onSubmit = (data) => {
     create(data)
@@ -20,6 +21,7 @@ const UserForm = () => {
       if (response.status == 201) {
         console.log(response.data);
         dispatch(updateTableUser(response.data.idUser))
+        eventShowForm()
       }
     }).finally(() => {
       successNotification('Elemento agregado')
@@ -27,8 +29,12 @@ const UserForm = () => {
     }) ;
   }
 
+  const eventShowForm = () => {
+    dispatch(showFormUser(false))
+  }
+
   return (
-    <div className="row mt-3 justify-content-center">
+    <div className={"row mt-3 justify-content-center " + (userFormSelector ? '' : 'd-none')}>
       <div className="col-md-12">
         <div className="card border-start-3" style={{ width: '100%', borderLeftColor: '#042c93' }}>
           <div className="card-header">
@@ -38,7 +44,7 @@ const UserForm = () => {
           <div className="card-body">
             <div className="row mt-1 mb-2">
               <div className="col-md-2 d-grid gap-2">
-                <button className="btn btn-sm btn-primary" type="button">
+                <button className="btn btn-sm btn-primary" type="button" onClick={() => eventShowForm()}>
                   <i className='cil-arrow-left icon'></i> Regresar
                 </button>
               </div>
