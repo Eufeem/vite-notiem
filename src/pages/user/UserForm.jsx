@@ -3,15 +3,30 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { successNotification } from '../../utils/notification';
 import { useDispatch, useSelector } from 'react-redux';
-import { showFormUser, updateTableUser } from '../../redux/userSlice';
+import { activateUpdate, showFormUser, updateTableUser } from '../../redux/userSlice';
 
 const UserForm = () => {
 
   const dispatch = useDispatch()
-  const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+  const { register, handleSubmit, formState: { errors }, watch, reset, setValue } = useForm();
   const urlapi = 'http://localhost:8080/user'
-  const userFormSelector = useSelector( (state) => state.user.showForm )
+  const userFormSelector = useSelector( (state) => state.user.showForm)
+  const updateSelector = useSelector( (state) => state.user.isUpdate)
+  const userSelector = useSelector( (state) => state.user)
+
+  useEffect(() => {
+    if (updateSelector) {
+      setValue('idUser', userSelector.idUser)
+      setValue('username', userSelector.username)
+      setValue('firstName', userSelector.firstName)
+      setValue('lastName', userSelector.lastName)
+      setValue('password', userSelector.password)
+      setValue('email', userSelector.email)
+      setValue('status', userSelector.status)
+    }
+  }, [updateSelector])
   
+
   const onSubmit = (data) => {
     create(data)
   }
@@ -24,13 +39,15 @@ const UserForm = () => {
         eventShowForm()
       }
     }).finally(() => {
-      successNotification('Elemento agregado')
+      updateSelector ? successNotification('Elemento actualizado') : successNotification('Elemento agregado')
       reset()
-    }) ;
+    });
   }
 
   const eventShowForm = () => {
+    dispatch(activateUpdate(false))
     dispatch(showFormUser(false))
+    reset()
   }
 
   return (
@@ -50,22 +67,35 @@ const UserForm = () => {
               </div>
             </div>
             
-            {/* <h5 className="card-title">
-              Formulario Usuario
-            </h5> */}
+            {/* { JSON.stringify(watch()) } */}
 
             {/* Form */}
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} noValidate> 
               <div className="row mt-3">
-                {/* Nombre */}
+
+                {/* ID */}
+                <input type="text" className="d-none" {...register('idUser')} />
+
+                {/* User name */}
                 <div className="col-md-4 mb-3">
-                  <label htmlFor="name" className="form-label">Nombre</label>
+                  <label htmlFor="username" className="form-label">Username</label>
                   <input type="text" 
-                    className={"form-control " + (errors.name ? 'is-invalid' : '')}
-                    id="name"
+                    className={"form-control " + (errors.username ? 'is-invalid' : '')}
+                    id="username" 
+                    placeholder="Ingresa tu usuario"
+                    {...register('username', { required: true, maxLength: 20 })}/>
+                    {errors.username && <span className='text-danger'>Username es requerido</span>}
+                </div>
+
+                {/* First Name */}
+                <div className="col-md-4 mb-3">
+                  <label htmlFor="firstName" className="form-label">Nombre</label>
+                  <input type="text" 
+                    className={"form-control " + (errors.firstName ? 'is-invalid' : '')}
+                    id="firstName"
                     placeholder="Ingresa tu nombre"
-                    {...register('name', { required: true, maxLength: 20 })}/>
-                    {errors.name && <span className='text-danger'>Nombre es requerido</span>}
+                    {...register('firstName', { required: true, maxLength: 20 })}/>
+                    {errors.firstName && <span className='text-danger'>Nombre es requerido</span>}
                 </div>
 
                 {/* Last Name */}
@@ -79,21 +109,10 @@ const UserForm = () => {
                     {errors.lastName && <span className='text-danger'>Apellido es requerido</span>}
                 </div>
 
-                {/* User name */}
-                <div className="col-md-4 mb-3">
-                  <label htmlFor="username" className="form-label">Username</label>
-                  <input type="text" 
-                    className={"form-control " + (errors.username ? 'is-invalid' : '')}
-                    id="username" 
-                    placeholder="Ingresa tu usuario"
-                    {...register('username', { required: true, maxLength: 20 })}/>
-                    {errors.username && <span className='text-danger'>Username es requerido</span>}
-                </div>
-
                 {/* Password */}
                 <div className="col-md-4 mb-3">
                   <label htmlFor="password" className="form-label">Contraseña</label>
-                  <input type="text" 
+                  <input type="password" 
                     className={"form-control " + (errors.password ? 'is-invalid' : '')}
                     id="password" 
                     placeholder="Ingresa la contraseña"
@@ -125,9 +144,17 @@ const UserForm = () => {
 
               <div className="row mt-3 justify-content-center">
                 <div className="col-md-4 d-grid gap-2">
-                  <button className="btn btn-success" type="submit">
-                    <i className="cil-plus icon"></i> Agregar
-                  </button>
+                {
+                    updateSelector ? (
+                      <button className="btn btn-warning" type="submit">
+                        <i className="cil-pencil icon"></i> Editar
+                      </button>
+                      ) : (
+                      <button className="btn btn-success" type="submit">
+                        <i className="cil-plus icon"></i> Agregar
+                      </button>
+                        )
+                  }
                 </div>
               </div>
             </form>

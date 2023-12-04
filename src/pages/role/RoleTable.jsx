@@ -1,20 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateTableUser, showFormUser } from '../../redux/userSlice'
+import { updateTable, showForm, updateForm, activateUpdate } from '../../redux/roleSlice'
 
-const TableUser = () => {
+const RoleTable = () => {
 
   const [list, setList] = useState([])
-  const header = ['#', 'Nombre', 'Apellido', 'Username', 'Email', 'Estatus', 'Acciones']
-  const urlapi = 'http://localhost:8080/user'
-  const userSelector = useSelector( (state) => state.user.value )
-  const userFormSelector = useSelector( (state) => state.user.showForm )
+  const header = ['#', 'Nombre', 'Codigo', 'Acciones']
+  const urlapi = 'http://localhost:8080/role'
+  const valueSelector = useSelector( (state) => state.role.value)
+  const formSelector = useSelector( (state) => state.role.showForm)
   const dispatch = useDispatch()
 
   useEffect(() => {
     getAll()
-  }, [userSelector])
+  }, [valueSelector])
 
   /* Get all users */
   const getAll = () => {
@@ -25,22 +25,28 @@ const TableUser = () => {
 
   /* Delete user */
   const deleteItem = (id) => {
-    axios.delete(urlapi + '/' + id).then((res) => {
+    axios.delete(urlapi + '/' + id).then((response) => {
       console.log('Delete id:', id);
-      dispatch(updateTableUser(id))
+      dispatch(updateTable(id))
     })
   }
 
+  /* Update set data */
+  const setData = (data) => {
+    dispatch(updateForm(data))
+    dispatch(activateUpdate(true))
+  }
+
   const eventShowForm = () => {
-    dispatch(showFormUser(true))
+    dispatch(showForm(true))
   }
 
   return (
-    <div className={"row mt-3 mb-3 justify-content-center " + (userFormSelector ? 'd-none' : '')}>
+    <div className={"row mt-3 mb-3 justify-content-center " + (formSelector ? 'd-none' : '')}>
       <div className="col-md-12">
         <div className="card border-start-3" style={{ width: '100%', borderLeftColor: '#042c93' }}>
           <div className="card-header">
-            Gestión Usuarios
+            Gestión Roles
           </div>
           
           <div className="card-body">
@@ -66,31 +72,21 @@ const TableUser = () => {
                     {
                       list.map((data, index) => (
                         <tr key={index} className='align-middle text-center'>
-                          <td>{data.idUser}</td>
+                          <td>{data.idRole}</td>
                           <td>{data.name}</td>
-                          <td>{data.lastName}</td>
-                          <td>{data.username}</td>
-                          <td>{data.email}</td>
-                          <td>
-                            {
-                              data.status == 1 ? (
-                                <span className="badge bg-success">Activo</span>
-                              ) : (
-                                <span className="badge bg-dark">Inactivo</span>
-                              )
-                            }
-                          </td>
+                          <td>{data.code}</td>
                           <td>
                             <button
                               type="button"
                               className="btn btn-danger"
-                              onClick={() => deleteItem(data.idUser)}>
-                              Eliminar
+                              onClick={() => deleteItem(data.idRole)}>
+                              <i className="cil-trash icon"></i> Eliminar
                             </button> &nbsp;
                             <button
                               type="button"
-                              className="btn btn-warning">
-                              Editar
+                              className="btn btn-warning"
+                              onClick={() => setData(data)}>
+                              <i className="cil-pencil icon"></i> Editar
                             </button>
                           </td>
                         </tr>
@@ -108,4 +104,4 @@ const TableUser = () => {
   )
 }
 
-export default TableUser
+export default RoleTable

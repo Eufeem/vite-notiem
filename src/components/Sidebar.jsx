@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const routerMenu = [
   { route: 'user', label: 'Usuarios', icon: 'nav-icon cil-speedometer' },
-  { route: 'roles', label: 'Roles', icon: 'nav-icon cil-speedometer' },
+  { route: 'role', label: 'Roles', icon: 'nav-icon cil-speedometer' },
   { route: 'permissions', label: 'Permisos', icon: 'nav-icon cil-speedometer' },
 ]
 

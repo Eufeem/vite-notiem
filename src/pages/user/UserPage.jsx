@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import TableUser from './TableUser'
+import UserTable from './UserTable'
 import UserForm from './UserForm'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ const UserPage = () => {
   return (
     <div className="container mt-2">
       <UserForm />
-      <TableUser />
+      <UserTable />
     </div>
   )
 }

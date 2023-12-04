@@ -11,6 +11,7 @@ const Layout = lazy(() => import('./components/Layout'))
 const LayoutPublic = lazy(() => import('./components/LayoutPublic'))
 const LoginPage = lazy(() => import('./pages/login/LoginPage'))
 const UserPage = lazy(() => import('./pages/user/UserPage'))
+const RolePage = lazy(() => import('./pages/role/RolePage'))
 const NotFoundPage = lazy(() => import('./pages/notFound/NotFoundPage'))
 
 export const App = () => {
@@ -58,6 +59,7 @@ export const App = () => {
           <Route path='/' element={<Layout />}>
             <Route index element={<UserPage />} />
             <Route path='/user' element={<UserPage />} />
+            <Route path='/role' element={<RolePage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>
