@@ -1,15 +1,16 @@
-import { CSpinner } from "@coreui/react"
+import { CSpinner } from '@coreui/react'
+import React from 'react'
 
-const Fallback = () => {
+const TableLoader = () => {
   return (
     <div className="d-flex justify-content-center">
       <CSpinner 
         size='sm'
-        color='secondary'
+        color='primary'
         className="m-5"
         style={{ width: '3rem', height: '3rem'}} />
     </div>
   )
 }
 
-export default Fallback
+export default TableLoader

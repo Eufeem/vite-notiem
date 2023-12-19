@@ -1,12 +1,14 @@
 import React from 'react'
 import RoleForm from './RoleForm'
 import RoleTable from './RoleTable'
+import RoleDataTable from './RoleDataTable'
 
 const RolePage = () => {
   return (
     <div className="container mt-2">
       <RoleForm />
-      <RoleTable />
+      {/* <RoleTable /> */}
+      <RoleDataTable />
     </div>
   )
 }

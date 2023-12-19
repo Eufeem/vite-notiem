@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { successNotification } from '../../utils/notification';
 import { useDispatch, useSelector } from 'react-redux';

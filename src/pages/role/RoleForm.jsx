@@ -75,7 +75,7 @@ const RoleForm = () => {
 
                 {/* User name */}
                 <div className="col-md-4 mb-3">
-                  <label htmlFor="username" className="form-label">Nombre</label>
+                  <label htmlFor="name" className="form-label">Nombre</label>
                   <input type="text" 
                     className={"form-control " + (errors.name ? 'is-invalid' : '')}
                     id="name" 

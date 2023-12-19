@@ -51,7 +51,7 @@ const RoleTable = () => {
           
           <div className="card-body">
             <div className="row mt-1">
-              <div className="col-md-2 d-grid gap-2">
+              <div className="col-xs-6 col-sm-4 col-md-4 col-lg-2 d-grid gap-2">
                 <button className="btn btn-sm btn-primary" type="button" onClick={() => eventShowForm()}>
                   <i className="cil-plus icon"></i> Agregar Nuevo
                 </button>
@@ -60,40 +60,42 @@ const RoleTable = () => {
 
             <div className="row justify-content-center mt-2">
               <div className="col-11">
-                <table className="table mt-2">
-                  <thead className="table-light">
-                    <tr className='text-center'>
+                <div className="table-responsive">
+                  <table className="table mt-2">
+                    <thead className="table-light">
+                      <tr className='text-center'>
+                        {
+                          header.map((row, index) => (<th key={index}>{row}</th>))
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
                       {
-                        header.map((row, index) => (<th key={index}>{row}</th>))
+                        list.map((data, index) => (
+                          <tr key={index} className='align-middle text-center'>
+                            <td>{data.idRole}</td>
+                            <td>{data.name}</td>
+                            <td>{data.code}</td>
+                            <td>
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => deleteItem(data.idRole)}>
+                                <i className="cil-trash icon"></i> Eliminar
+                              </button> &nbsp;
+                              <button
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={() => setData(data)}>
+                                <i className="cil-pencil icon"></i> Editar
+                              </button>
+                            </td>
+                          </tr>
+                        ))
                       }
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      list.map((data, index) => (
-                        <tr key={index} className='align-middle text-center'>
-                          <td>{data.idRole}</td>
-                          <td>{data.name}</td>
-                          <td>{data.code}</td>
-                          <td>
-                            <button
-                              type="button"
-                              className="btn btn-danger"
-                              onClick={() => deleteItem(data.idRole)}>
-                              <i className="cil-trash icon"></i> Eliminar
-                            </button> &nbsp;
-                            <button
-                              type="button"
-                              className="btn btn-warning"
-                              onClick={() => setData(data)}>
-                              <i className="cil-pencil icon"></i> Editar
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    }
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 

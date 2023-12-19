@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Footer = () => {
   return (
     <footer className="footer mt-3 footer-notiem" style={{background: '#fff' }}>
