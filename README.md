@@ -20,6 +20,6 @@
 - DataTable:  npm install react-data-table-component
 - Style Components: npm i styled-components@^5.0.0
 
-# Commands 
+## Commands 
 - Run dev: npm run dev
 
