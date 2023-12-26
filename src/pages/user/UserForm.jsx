@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { successNotification } from '../../utils/notification';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,11 @@ const UserForm = () => {
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors }, watch, reset, setValue } = useForm();
   const urlapi = 'http://localhost:8080/user'
+  const apiUrl = 'http://localhost:8080/';
   const userFormSelector = useSelector( (state) => state.user.showForm)
   const updateSelector = useSelector( (state) => state.user.isUpdate)
   const userSelector = useSelector( (state) => state.user)
+  const [roles, setRoles] = useState([])
 
   useEffect(() => {
     if (updateSelector) {
@@ -23,7 +25,11 @@ const UserForm = () => {
       setValue('password', userSelector.password)
       setValue('email', userSelector.email)
       setValue('status', userSelector.status)
+      setValue('role', userSelector.role)
     }
+
+    getRoles()
+
   }, [updateSelector])
   
 
@@ -32,6 +38,11 @@ const UserForm = () => {
   }
   
   const create = (user) => {
+    let rolesFilter = roles.find(role => role.idRole === parseInt(user.role)  )
+    console.log("Roles filter", rolesFilter)
+    user.role = rolesFilter;
+    console.log("role final", user)
+
     axios.post(urlapi, user).then((response) => {
       if (response.status == 201) {
         console.log(response.data);
@@ -48,6 +59,12 @@ const UserForm = () => {
     dispatch(activateUpdate(false))
     dispatch(showFormUser(false))
     reset()
+  }
+
+  const getRoles = () => {
+    axios.get(apiUrl + 'role').then((response) => { 
+      setRoles(response.data)
+    })
   }
 
   return (
@@ -134,27 +151,41 @@ const UserForm = () => {
                 {/* Status */}
                 <div className="col-md-4 mb-3">
                   <label className="form-label">Estatus</label>
-                  <select className="form-select" defaultValue={1} aria-label="Default select example" id="status"
+                  <select className="form-select" defaultValue={1} aria-label="Status list" id="status"
                   {...register('status', { required: true, maxLength: 20 })}>
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
                   </select>
                 </div>
+
+                {/* Role */}
+                <div className="col-md-4 mb-3">
+                  <label className="form-label">Rol</label>
+                  <select className="form-select" defaultValue={1} aria-label="Role list" id="role"
+                  {...register('role', { required: true, maxLength: 20 })}>
+                    {
+                      roles.map(data => (
+                        <option key={data.idRole} value={data.idRole}>{data.name}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+
               </div>
 
               <div className="row mt-3 justify-content-center">
                 <div className="col-md-4 d-grid gap-2">
                 {
-                    updateSelector ? (
-                      <button className="btn btn-warning" type="submit">
-                        <i className="cil-pencil icon"></i> Editar
-                      </button>
-                      ) : (
-                      <button className="btn btn-success" type="submit">
-                        <i className="cil-plus icon"></i> Agregar
-                      </button>
-                        )
-                  }
+                  updateSelector ? (
+                    <button className="btn btn-warning" type="submit">
+                      <i className="cil-pencil icon"></i> Editar
+                    </button>
+                  ) : (
+                    <button className="btn btn-success" type="submit">
+                      <i className="cil-plus icon"></i> Agregar
+                    </button>
+                  )
+                }
                 </div>
               </div>
             </form>

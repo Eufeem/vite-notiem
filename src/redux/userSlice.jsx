@@ -8,6 +8,7 @@ const initialState = {
     password: '',
     email: '',
     status: '',
+    role: 0,
     value: 0,
     showForm: false,
     isUpdate: false 
@@ -25,7 +26,10 @@ export const userSlice = createSlice({
         },
         updateForm: (state, action) => {
             const { idUser, username, firstName, 
-                lastName, password, email, status } = action.payload
+                lastName, password, email, status, role } = action.payload
+
+            console.log("role slice", role)
+
             state.idUser = idUser
             state.username = username
             state.firstName = firstName
@@ -33,6 +37,7 @@ export const userSlice = createSlice({
             state.password = password
             state.email = email
             state.status = status
+            state.role = role.idRole
             state.showForm = true
         },
         activateUpdate: (state, action) => {

@@ -21,18 +21,13 @@ const UserDataTable = () => {
       selector: row => row.username,
       sortable: true,
     }, {
-      name: 'Nombre',
-      selector: row => row.firstName,
-      sortable: true,
-    }, {
-      name: 'Apellido',
-      selector: row => row.lastName,
-      sortable: true,
-    }, {
       name: 'Email',
       selector: row => row.email,
       sortable: true,
-      omit: true
+    }, {
+      name: 'Rol',
+      selector: row => row.role.name,
+      sortable: true,
     }, {
       name: 'Status',
       selector: row => <>

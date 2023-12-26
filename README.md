@@ -7,6 +7,7 @@
 - Hook Forms
 - Redux, ReduxToolkit
 - DataTable
+- Docker
 
 ## Dependencies
 - Coreui:     npm install @coreui/react
@@ -22,4 +23,6 @@
 
 ## Commands 
 - Run dev: npm run dev
+- Build: npm run build
+- Preview: npm run preview
 
