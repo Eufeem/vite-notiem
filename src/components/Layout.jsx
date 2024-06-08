@@ -8,17 +8,29 @@ import Fallback from './Fallback'
 import Sidebar2 from './Sidebar2'
 
 const Layout = () => {
+
+  const isAdmin = true;
+
   return (
-    <main style={{ display: 'flex' }}>
-      {/* <Sidebar /> */}
-      <Sidebar2 />
-      <div style={{ display: 'block', width: '100%', height: '100' }}>
-        <Navbar />
-        <Suspense fallback={<Fallback />}>
-          <Outlet />
-        </Suspense>
-      </div>
-    </main>
+    <>
+      {
+        isAdmin ? (
+          <main style={{ display: 'flex' }}>
+            <Sidebar2 />
+            <div style={{ display: 'block', width: '100%', height: '100' }}>
+              <Navbar />
+              <Suspense fallback={<Fallback />}>
+                <Outlet />
+              </Suspense>
+            </div>
+          </main>
+        ) : (
+          <Suspense fallback={<Fallback />}>
+            <Outlet />
+          </Suspense>
+        )
+      }
+    </>
   )
 }
 
